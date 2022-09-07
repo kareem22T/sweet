@@ -1,0 +1,13 @@
+@font-face {
+    font-family: pt-sans-regular;
+    src: url(../fonts/PTSans-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: pt-sans-bold;
+    src: url(../fonts/PTSans-Bold.ttf) format('truetype');
+}
+
+/* main rules */
+* {
+    font-family: pt-sans-regular;
+}

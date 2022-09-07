@@ -1,0 +1,80 @@
+<ul>
+
+    <?php
+    // Define our WP Query Parameters
+    $the_query = new WP_Query('posts_per_page=5'); ?>
+
+    <?php
+    // Start our WP Query
+    while ($the_query->have_posts()) : $the_query->the_post();
+        // Display the Post Title with Hyperlink
+    ?>
+
+    <li><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></li>
+
+    <li><?php
+            // Display the Post Excerpt
+            the_excerpt(__('(more…)')); ?>
+    </li>
+
+    <li>
+    </li>
+
+    <li>
+        <?php the_post_thumbnail() ?>
+    </li>
+
+    <li>
+        <a href="<?php the_permalink() ?>" class="read-more">
+            READ MORE
+        </a>
+    </li>
+
+    <?php
+    // Repeat the process and reset once it hits the limit
+    endwhile;
+    wp_reset_postdata();
+    ?>
+</ul>
+
+
+        // $stmt = $wpdb->get_results(
+        //     "SELECT title, post_name, date, content, CONCAT(LEFT(image, LENGTH(image) - LOCATE('.', REVERSE(image))),'-150x150.',SUBSTRING_INDEX(image, '.', -1)) AS image
+        // FROM (
+        //     SELECT
+        //     p.post_title AS title,
+        //     p.post_status AS 'status',
+        //     p.post_date AS date,
+        //     p.post_content AS content,
+        //     p.post_name AS post_name,
+        //     (SELECT `guid` FROM wp_posts WHERE id = m.meta_value) AS image
+        //     FROM wp_posts p, wp_postmeta m
+        //     WHERE p.post_type = 'post'
+        //     AND p.post_status = 'publish'
+        //     AND p.id = m.post_id
+        //     AND m.meta_key = '_thumbnail_id'
+        //     ORDER BY date DESC
+        //     LIMIT 4
+        // ) TT"
+        // );
+
+        // foreach ($stmt as $row) {
+        //     echo '
+
+        //     <div>
+        //         <h1> ' . $row->title . ' </h1>
+        //         <a href="http://localhost/sweet-2/blog/"> ' . $row->post_name . ' </a>
+
+        //         ' . $row->content . '
+
+        //         <img src="' . $row->image . '" alt="">
+        //     </div>
+
+        //     ';
+        // }
+
+        foreach ($recent_posts as $k => $v) :
+            foreach ($v as $key => $value) {
+                echo $key . ': ' . $value . '<br>';
+            }
+        endforeach;
